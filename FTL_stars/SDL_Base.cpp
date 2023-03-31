@@ -7,8 +7,15 @@ and may not be redistributed without written permission.*/
 #include <stdio.h>
 #include <string>
 #include <cmath>
+#include <vector>
+#include <random>
+#include <time.h>
+#include <thread>         // std::this_thread::sleep_for
+#include <chrono>
 
 #undef main
+
+using namespace std;
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 1920;
@@ -135,6 +142,45 @@ SDL_Texture* loadTexture(std::string path)
 	return newTexture;
 }
 
+
+
+class Star
+{
+public:
+
+	int x;
+	int y;
+	float z;
+
+	Star()
+	{
+		x = rand() % SCREEN_WIDTH - SCREEN_WIDTH / 2;
+		y = rand() % SCREEN_HEIGHT - SCREEN_HEIGHT / 2;
+		z = float(rand()%SCREEN_WIDTH/2);
+	}
+
+	void update()
+	{
+		z -= 1;
+		if (z == 0)
+		{
+			z = float(SCREEN_WIDTH/2);
+			x = rand() % SCREEN_WIDTH - SCREEN_WIDTH / 2;
+			y = rand() % SCREEN_HEIGHT - SCREEN_HEIGHT / 2;
+		}	
+	}
+
+	void render(SDL_Renderer* ren)
+	{
+		int sx = x / (z) * SCREEN_WIDTH/2;
+		int sy = y / (z) * SCREEN_HEIGHT/2;
+
+		SDL_RenderDrawPoint(ren, sx + SCREEN_WIDTH / 2, sy + SCREEN_HEIGHT / 2);
+	}
+};
+
+
+
 int main(int argc, char* args[])
 {
 
@@ -159,6 +205,18 @@ int main(int argc, char* args[])
 			SDL_Event e;
 
 
+			srand(time(NULL));
+
+			vector<Star> stars;
+			stars.resize(400);
+			for (int i = 0; i < stars.size(); i++)
+			{
+				stars[i] = Star();
+			}
+
+
+
+
 			//While application is running
 			while (!quit)
 			{
@@ -174,12 +232,21 @@ int main(int argc, char* args[])
 
 
 				//Clear screen
-				SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+				SDL_SetRenderDrawColor(gRenderer, 0x00, 0x00, 0x00, 0xFF);
 				SDL_RenderClear(gRenderer);
 
 
 				//render things
 
+				SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+
+				for (int i = 0; i < stars.size(); i++)
+				{
+					stars[i].update();
+					stars[i].render(gRenderer);
+
+				}
+				std::this_thread::sleep_for(std::chrono::milliseconds(10));
 
 				
 

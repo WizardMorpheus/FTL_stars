@@ -1,5 +1,6 @@
 ﻿  SDL_Base.cpp
-E:\Visual_Studio\Projects\FTL_stars\FTL_stars\SDL_Base.cpp(175,10): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-E:\Visual_Studio\Projects\FTL_stars\FTL_stars\SDL_Base.cpp(176,10): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-E:\Visual_Studio\Projects\FTL_stars\FTL_stars\SDL_Base.cpp(208,14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+E:\Visual_Studio\Projects\FTL_stars\FTL_stars\SDL_Base.cpp(179,10): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+E:\Visual_Studio\Projects\FTL_stars\FTL_stars\SDL_Base.cpp(180,10): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+E:\Visual_Studio\Projects\FTL_stars\FTL_stars\SDL_Base.cpp(182,18): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+E:\Visual_Studio\Projects\FTL_stars\FTL_stars\SDL_Base.cpp(214,14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   FTL_stars.vcxproj -> E:\Visual_Studio\Projects\FTL_stars\x64\Debug\FTL_stars.exe

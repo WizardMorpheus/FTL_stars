@@ -161,12 +161,16 @@ public:
 
 	void update()
 	{
-		z -= 1;
+		z--;
 		if (z == 0)
 		{
-			z = float(SCREEN_WIDTH/2);
-			x = rand() % SCREEN_WIDTH - SCREEN_WIDTH / 2;
-			y = rand() % SCREEN_HEIGHT - SCREEN_HEIGHT / 2;
+			z++;
+			if (rand() % 2)
+			{
+				z = float(SCREEN_WIDTH / 2);
+				x = rand() % SCREEN_WIDTH - SCREEN_WIDTH / 2;
+				y = rand() % SCREEN_HEIGHT - SCREEN_HEIGHT / 2;
+			}
 		}	
 	}
 
@@ -175,6 +179,8 @@ public:
 		int sx = x / (z) * SCREEN_WIDTH/2;
 		int sy = y / (z) * SCREEN_HEIGHT/2;
 
+		int brightness = z / float(SCREEN_WIDTH / 2) * 255;
+		SDL_SetRenderDrawColor(gRenderer, 0xFF - brightness, 0xFF - brightness, 0xFF - brightness, 0xFF);
 		SDL_RenderDrawPoint(ren, sx + SCREEN_WIDTH / 2, sy + SCREEN_HEIGHT / 2);
 	}
 };
@@ -208,7 +214,7 @@ int main(int argc, char* args[])
 			srand(time(NULL));
 
 			vector<Star> stars;
-			stars.resize(400);
+			stars.resize(1000);
 			for (int i = 0; i < stars.size(); i++)
 			{
 				stars[i] = Star();
@@ -238,7 +244,6 @@ int main(int argc, char* args[])
 
 				//render things
 
-				SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 
 				for (int i = 0; i < stars.size(); i++)
 				{
@@ -246,7 +251,7 @@ int main(int argc, char* args[])
 					stars[i].render(gRenderer);
 
 				}
-				std::this_thread::sleep_for(std::chrono::milliseconds(10));
+				std::this_thread::sleep_for(std::chrono::milliseconds(5));
 
 				
 
